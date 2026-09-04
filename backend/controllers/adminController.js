@@ -11,8 +11,6 @@ const loginAdmin = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        // Temporary debugging
-        console.log("Entered email:", email);
         console.log("Email match:", email === process.env.ADMIN_EMAIL);
         console.log("Password match:", password === process.env.ADMIN_PASSWORD);
 
@@ -25,11 +23,7 @@ const loginAdmin = async (req, res) => {
                 process.env.JWT_SECRET
             );
 
-            res.json({
-                success: true,
-                token
-            });
-
+            res.json({ success: true, token });
         } else {
             res.json({
                 success: false,
@@ -38,14 +32,11 @@ const loginAdmin = async (req, res) => {
         }
 
     } catch (error) {
-        console.log("Admin Login Error:", error);
-
-        res.json({
-            success: false,
-            message: error.message
-        });
+        console.log(error);
+        res.json({ success: false, message: error.message });
     }
-}
+};
+
 // API for adding Doctor
 const addDoctor = async (req, res) => {
   try {
